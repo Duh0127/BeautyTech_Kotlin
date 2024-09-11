@@ -19,14 +19,15 @@
 
         <Button
             android:id="@+id/btn_menu"
-            android:layout_width="41dp"
+            android:layout_width="50dp"
             android:layout_height="45dp"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:backgroundTint="#6424BF"
             android:text="Menu"
             android:textAlignment="center"
-            android:textSize="8sp"
+            android:textColor="#FFFFFF"
+            android:textSize="10sp"
             android:textStyle="bold" />
 
         <ImageView
@@ -41,12 +42,13 @@
 
         <Button
             android:id="@+id/btn_login"
-            android:layout_width="42dp"
+            android:layout_width="50dp"
             android:layout_height="45dp"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:backgroundTint="#6424BF"
             android:text="Login"
+            android:textColor="#FFFFFF"
             android:textSize="10sp" />
 
     </LinearLayout>
