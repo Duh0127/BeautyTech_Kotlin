@@ -9,21 +9,20 @@ class MainActivity : Activity() {
 
     override fun onCreate(bundle: Bundle?) {
         super.onCreate(bundle)
-
         setContentView(R.layout.main_activity)
 
-        // Encontre o botão com o ID btn_login
-        val loginButton: Button = findViewById(R.id.btn_login)
 
-        // Configure o listener de clique para o botão
+        val menuButton = findViewById<Button>(R.id.btn_menu)
+        menuButton.setOnClickListener {
+            val profileIntent = Intent(this, ProfileActivity::class.java)
+            startActivity(profileIntent)
+        }
+
+        val loginButton: Button = findViewById(R.id.btn_login)
         loginButton.setOnClickListener {
-            // Crie um Intent para iniciar a LoginActivity
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
-
-
-
 
 
 
