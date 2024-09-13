@@ -17,7 +17,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="198dp"
+            android:layout_height="253dp"
             android:orientation="vertical"
             android:paddingTop="12dp">
 
@@ -30,19 +30,33 @@
                 app:srcCompat="@drawable/logo" />
 
             <TextView
-                android:id="@+id/textView11"
+                android:id="@+id/txtName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Usuário"
                 android:textAlignment="center"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/txtEndereco"
+                android:id="@+id/txtEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Rua Aleatoria, 130"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/txtCpf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/txtTelefone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:textAlignment="center"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp" />
@@ -73,7 +87,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="Cor de Pele"
+                        android:text="Status Civil"
                         android:textAlignment="center"
                         android:textAllCaps="true"
                         android:textColor="#FFFFFF"
@@ -81,12 +95,11 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/txtCorPele1"
+                        android:id="@+id/txtStatusCivil"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginTop="24dp"
-                        android:text="Branca"
                         android:textAlignment="center"
                         android:textColor="#FFFFFF"
                         android:textSize="12sp" />
@@ -103,7 +116,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="Tipo de Cabelo"
+                        android:text="Gênero"
                         android:textAlignment="center"
                         android:textAllCaps="true"
                         android:textColor="#FFFFFF"
@@ -111,12 +124,11 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/txtCorPele2"
+                        android:id="@+id/txtGenero"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginTop="24dp"
-                        android:text="Liso"
                         android:textAlignment="center"
                         android:textColor="#FFFFFF"
                         android:textSize="12sp" />
@@ -127,21 +139,33 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:gravity="center_horizontal"
             android:orientation="vertical">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="130dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
                 android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/btnBack"
-                    android:layout_width="50dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_marginEnd="12dp"
+                    android:background="#FFFFFF"
                     android:text="Voltar" />
+
+                <Button
+                    android:id="@+id/btnLogout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:background="#BA0000"
+                    android:text="Deslogar" />
             </LinearLayout>
         </LinearLayout>
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

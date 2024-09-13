@@ -18,13 +18,13 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <Button
-            android:id="@+id/btn_menu"
-            android:layout_width="50dp"
+            android:id="@+id/btn_produtos"
+            android:layout_width="130dp"
             android:layout_height="45dp"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:backgroundTint="#6424BF"
-            android:text="Menu"
+            android:text="Produtos"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
             android:textSize="10sp"
@@ -42,7 +42,7 @@
 
         <Button
             android:id="@+id/btn_login"
-            android:layout_width="50dp"
+            android:layout_width="130dp"
             android:layout_height="45dp"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"

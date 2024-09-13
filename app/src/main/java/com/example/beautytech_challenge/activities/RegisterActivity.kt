@@ -1,4 +1,4 @@
-package com.example.beautytech_challenge
+package com.example.beautytech_challenge.activities
 
 import android.app.Activity
 import android.content.Intent
@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import com.example.beautytech_challenge.R
 
 class RegisterActivity : Activity() {
     override fun onCreate(bundle: Bundle?) {

@@ -54,7 +54,10 @@
                     android:layout_height="39dp"
                     android:background="#BDBDBD"
                     android:ems="10"
+                    android:hint="Digite seu email"
                     android:inputType="textEmailAddress"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
                     android:textColor="#000000"
                     android:textSize="20sp" />
             </LinearLayout>
@@ -78,7 +81,10 @@
                     android:layout_height="39dp"
                     android:background="#B3B3B3"
                     android:ems="10"
+                    android:hint="Digite sua senha"
                     android:inputType="textPassword"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
                     android:textColor="#000000"
                     android:textSize="20sp" />
 
