@@ -1,4 +1,4 @@
-package com.example.beautytech_challenge
+package com.example.beautytech_challenge.adapters
 
 import android.view.LayoutInflater
 import android.view.View

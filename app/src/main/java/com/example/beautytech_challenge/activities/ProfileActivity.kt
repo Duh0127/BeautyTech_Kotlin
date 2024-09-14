@@ -10,22 +10,15 @@ import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
-import com.example.beautytech_challenge.MainActivity
 import com.example.beautytech_challenge.R
-import okhttp3.Call
-import okhttp3.Callback
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import okhttp3.Response
+import com.example.beautytech_challenge.repositories.ProfileRepository
 import org.json.JSONException
 import org.json.JSONObject
-import java.io.IOException
 
 class ProfileActivity : Activity() {
 
-    lateinit var userInfo: JSONObject
-    val BASE_URL = "https://0f7867b6-e97c-46c8-8a0f-798b12121071-00-1xlw48mwghd1f.spock.replit.dev"
-    val cliente = OkHttpClient()
+    private lateinit var userInfo: JSONObject
+    private val repository = ProfileRepository()
 
     private lateinit var progressBar: ProgressBar
 
@@ -34,7 +27,6 @@ class ProfileActivity : Activity() {
         setContentView(R.layout.profile_layout)
 
         val profileContent = findViewById<LinearLayout>(R.id.profile_content)
-//        val loadingSpinner = findViewById<ProgressBar>(R.id.loading_spinner)
         progressBar = findViewById(R.id.loading_spinner)
 
         val backButton = findViewById<Button>(R.id.btnBack)
@@ -55,7 +47,7 @@ class ProfileActivity : Activity() {
             startActivity(intent)
             finish()
         }
-        // Show the loading spinner and hide profile content initially
+
         profileContent.visibility = View.GONE
     }
 
@@ -83,70 +75,45 @@ class ProfileActivity : Activity() {
     private fun getUserById(userId: Int) {
         runOnUiThread { progressBar.visibility = View.VISIBLE }
 
-        val url = "$BASE_URL/cliente/$userId"
-        val request = Request.Builder()
-            .url(url)
-            .build()
+        repository.getUserById(userId) { responseBody, errorMessage ->
+            runOnUiThread {
+                progressBar.visibility = View.GONE
+                if (responseBody != null) {
+                    try {
+                        val jsonObject = JSONObject(responseBody)
+                        Log.d("USER", jsonObject.toString())
 
-        cliente.newCall(request).enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                runOnUiThread {
-                    Toast.makeText(this@ProfileActivity, "Falha ao obter os dados do usuário", Toast.LENGTH_LONG).show()
+                        val nomeUsuario = jsonObject.getString("NM_CLIENTE")
+                        val emailUsuario = jsonObject.getString("EMAIL_CLIENTE")
+                        val statusCivil = jsonObject.getString("ESTADO_CIVIL_CLIENTE")
+                        val genero = jsonObject.getString("NM_GENERO")
+                        val cpf = jsonObject.getString("CPF_CLIENTE")
+                        val nrtelefone = jsonObject.getString("NR_TELEFONE")
+                        val ddd = jsonObject.getString("DDD_TELEFONE")
 
-                    val intent = Intent(this@ProfileActivity, LoginActivity::class.java)
-                    startActivity(intent)
-                    finish()
-                    progressBar.visibility = View.GONE
+                        val nomeTextView = findViewById<TextView>(R.id.txtName)
+                        val emailTextView = findViewById<TextView>(R.id.txtEmail)
+                        val statusCivilView = findViewById<TextView>(R.id.txtStatusCivil)
+                        val generoView = findViewById<TextView>(R.id.txtGenero)
+                        val cpfView = findViewById<TextView>(R.id.txtCpf)
+                        val telView = findViewById<TextView>(R.id.txtTelefone)
+
+                        nomeTextView.text = nomeUsuario
+                        emailTextView.text = emailUsuario
+                        statusCivilView.text = statusCivil
+                        generoView.text = genero
+                        cpfView.text = """CPF $cpf"""
+                        telView.text = """($ddd) $nrtelefone"""
+
+                        findViewById<LinearLayout>(R.id.profile_content).visibility = View.VISIBLE
+                    } catch (e: JSONException) {
+                        Toast.makeText(this@ProfileActivity, "Erro ao processar os dados do usuário", Toast.LENGTH_LONG).show()
+                    }
+                } else if (errorMessage != null) {
+                    Toast.makeText(this@ProfileActivity, errorMessage, Toast.LENGTH_LONG).show()
                 }
             }
-
-            override fun onResponse(call: Call, response: Response) {
-                if (response.isSuccessful) {
-                    runOnUiThread { progressBar.visibility = View.GONE }
-                    val responseBody = response.body?.string()
-                    if (responseBody != null) {
-                        try {
-                            val jsonObject = JSONObject(responseBody)
-                            Log.d("USER", jsonObject.toString())
-
-                            val nomeUsuario = jsonObject.getString("NM_CLIENTE")
-                            val emailUsuario = jsonObject.getString("EMAIL_CLIENTE")
-                            val statusCivil = jsonObject.getString("ESTADO_CIVIL_CLIENTE")
-                            val genero = jsonObject.getString("NM_GENERO")
-                            val cpf = jsonObject.getString("CPF_CLIENTE")
-                            val nrtelefone = jsonObject.getString("NR_TELEFONE")
-                            val ddd = jsonObject.getString("DDD_TELEFONE")
-
-                            runOnUiThread {
-                                val nomeTextView = findViewById<TextView>(R.id.txtName)
-                                val emailTextView = findViewById<TextView>(R.id.txtEmail)
-                                val statusCivilView = findViewById<TextView>(R.id.txtStatusCivil)
-                                val generoView = findViewById<TextView>(R.id.txtGenero)
-                                val cpfView = findViewById<TextView>(R.id.txtCpf)
-                                val telView = findViewById<TextView>(R.id.txtTelefone)
-
-                                nomeTextView.text = nomeUsuario
-                                emailTextView.text = emailUsuario
-                                statusCivilView.text = statusCivil
-                                generoView.text = genero
-                                cpfView.text = """CPF $cpf"""
-                                telView.text = """($ddd) $nrtelefone"""
-
-                                findViewById<LinearLayout>(R.id.profile_content).visibility = View.VISIBLE
-                            }
-                        } catch (e: JSONException) {
-                            runOnUiThread {
-                                Toast.makeText(this@ProfileActivity, "Erro ao processar os dados do usuário", Toast.LENGTH_LONG).show()
-                            }
-                        }
-                    }
-                } else {
-                    runOnUiThread {
-                        Toast.makeText(this@ProfileActivity, "Erro ao obter os dados do usuário", Toast.LENGTH_LONG).show()
-                    }
-                }
-            }
-        })
+        }
     }
 }
 

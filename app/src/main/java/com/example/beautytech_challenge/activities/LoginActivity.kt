@@ -9,26 +9,18 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
-import com.example.beautytech_challenge.MainActivity
 import com.example.beautytech_challenge.R
-import com.google.gson.Gson
-import okhttp3.*
-import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.RequestBody.Companion.toRequestBody
+import com.example.beautytech_challenge.repositories.LoginRepository
 import org.json.JSONObject
-import java.io.IOException
 
 class LoginActivity : Activity() {
 
-    val BASE_URL = "https://0f7867b6-e97c-46c8-8a0f-798b12121071-00-1xlw48mwghd1f.spock.replit.dev"
     private lateinit var progressBar: ProgressBar
+    private val loginRepository = LoginRepository()
 
     override fun onCreate(bundle: Bundle?) {
         super.onCreate(bundle)
         setContentView(R.layout.login_layout)
-
-        val cliente = OkHttpClient()
-        val gson = Gson()
 
         val edtEmail = findViewById<EditText>(R.id.edtEmail)
         val edtSenha = findViewById<EditText>(R.id.edtPassword)
@@ -36,77 +28,27 @@ class LoginActivity : Activity() {
         progressBar = findViewById(R.id.loading_spinner)
 
         loginButton.setOnClickListener {
-            if (edtEmail.text.isBlank() || edtSenha.text.isBlank()) {
+            val email = edtEmail.text.toString()
+            val password = edtSenha.text.toString()
+
+            if (email.isBlank() || password.isBlank()) {
                 Toast.makeText(this, "Por favor, preencha todos os campos.", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
 
-            val jsonBody = """
-                {
-                    "email": "${edtEmail.text}",
-                    "senha": "${edtSenha.text}"
-                }
-            """.trimIndent()
-
-            val request = Request.Builder()
-                .url("$BASE_URL/login")
-                .post(jsonBody.toRequestBody("application/json".toMediaType()))
-                .build()
-
             progressBar.visibility = View.VISIBLE
 
-            val response = object : Callback {
-                override fun onFailure(call: Call, e: IOException) {
-                    Log.d("LOGIN", "Credenciais Inválidas")
-                    runOnUiThread {
-                        progressBar.visibility = View.GONE
-                        Toast.makeText(
-                            this@LoginActivity,
-                            "Credenciais Inválidas",
-                            Toast.LENGTH_LONG
-                        ).show()
-                    }
-                }
+            loginRepository.login(email, password) { jsonObject, errorMessage ->
+                runOnUiThread {
+                    progressBar.visibility = View.GONE
 
-                override fun onResponse(call: Call, response: Response) {
-                    runOnUiThread {
-                        progressBar.visibility = View.GONE
-                    }
-
-                    val resposta = response.body?.string()
-
-                    if (resposta != null) {
-                        val jsonObject = JSONObject(resposta)
-                        val usuario = jsonObject.getJSONObject("usuario")
-                        val nomeUsuario = usuario.getString("nome")
-                        val token = jsonObject.getString("token")
-
-                        Log.d("LOGIN", "Login Efetuado com sucesso: $nomeUsuario")
-
-                        runOnUiThread {
-                            val sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
-                            val editor = sharedPreferences.edit()
-                            editor.putString("userData", jsonObject.toString())
-                            editor.putString("token", token)
-                            editor.apply()
-
-                            Toast.makeText(
-                                this@LoginActivity,
-                                "Bem-vindo $nomeUsuario",
-                                Toast.LENGTH_LONG
-                            ).show()
-
-                            edtEmail.setText("")
-                            edtSenha.setText("")
-
-                            val intent = Intent(this@LoginActivity, ProfileActivity::class.java)
-                            startActivity(intent)
-                            finish()
-                        }
+                    if (jsonObject != null) {
+                        handleSuccessfulLogin(jsonObject)
+                    } else if (errorMessage != null) {
+                        Toast.makeText(this@LoginActivity, errorMessage, Toast.LENGTH_LONG).show()
                     }
                 }
             }
-            cliente.newCall(request).enqueue(response)
         }
 
         val registerButton = findViewById<Button>(R.id.btn_register)
@@ -116,11 +58,34 @@ class LoginActivity : Activity() {
         }
 
         val mainButton = findViewById<Button>(R.id.btn_back)
-        mainButton.setOnClickListener{
+        mainButton.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
-
     }
 
+    private fun handleSuccessfulLogin(jsonObject: JSONObject) {
+        val usuario = jsonObject.getJSONObject("usuario")
+        val nomeUsuario = usuario.getString("nome")
+        val token = jsonObject.getString("token")
+
+        Log.d("LOGIN", "Login Efetuado com sucesso: $nomeUsuario")
+
+        val sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putString("userData", jsonObject.toString())
+        editor.putString("token", token)
+        editor.apply()
+
+        Toast.makeText(this, "Bem-vindo $nomeUsuario", Toast.LENGTH_LONG).show()
+
+        val edtEmail = findViewById<EditText>(R.id.edtEmail)
+        val edtSenha = findViewById<EditText>(R.id.edtPassword)
+        edtEmail.setText("")
+        edtSenha.setText("")
+
+        val intent = Intent(this, ProfileActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
 }
