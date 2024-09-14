@@ -20,6 +20,28 @@ class MainActivity : Activity() {
             startActivity(productsIntent)
         }
 
+        val btnHigiene = findViewById<Button>(R.id.btn_higiene)
+        val btnCabelos = findViewById<Button>(R.id.btn_cabelos)
+        val btnUnhas = findViewById<Button>(R.id.btn_unhas)
+        val btnPerfumes = findViewById<Button>(R.id.btn_perfumes)
+
+        val productIntent = Intent(this, ProductsActivity::class.java)
+        btnHigiene.setOnClickListener {
+            startActivity(productIntent)
+        }
+
+        btnCabelos.setOnClickListener {
+            startActivity(productIntent)
+        }
+
+        btnUnhas.setOnClickListener {
+            startActivity(productIntent)
+        }
+
+        btnPerfumes.setOnClickListener {
+            startActivity(productIntent)
+        }
+
         updateLoginButton()
     }
 

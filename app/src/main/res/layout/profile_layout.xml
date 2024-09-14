@@ -6,7 +6,21 @@
     android:layout_height="match_parent"
     android:background="#100D28">
 
+    <ProgressBar
+        android:id="@+id/loading_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        android:indeterminate="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Main content -->
     <LinearLayout
+        android:id="@+id/profile_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -17,14 +31,14 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="253dp"
+            android:layout_height="221dp"
             android:orientation="vertical"
             android:paddingTop="12dp">
 
             <ImageView
                 android:id="@+id/imageView3"
                 android:layout_width="285dp"
-                android:layout_height="137dp"
+                android:layout_height="108dp"
                 android:layout_gravity="center_horizontal"
                 android:visibility="visible"
                 app:srcCompat="@drawable/logo" />

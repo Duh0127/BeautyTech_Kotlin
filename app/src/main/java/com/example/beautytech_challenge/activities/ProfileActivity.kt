@@ -4,7 +4,10 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
+import android.widget.LinearLayout
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import com.example.beautytech_challenge.MainActivity
@@ -24,9 +27,15 @@ class ProfileActivity : Activity() {
     val BASE_URL = "https://0f7867b6-e97c-46c8-8a0f-798b12121071-00-1xlw48mwghd1f.spock.replit.dev"
     val cliente = OkHttpClient()
 
+    private lateinit var progressBar: ProgressBar
+
     override fun onCreate(bundle: Bundle?) {
         super.onCreate(bundle)
         setContentView(R.layout.profile_layout)
+
+        val profileContent = findViewById<LinearLayout>(R.id.profile_content)
+//        val loadingSpinner = findViewById<ProgressBar>(R.id.loading_spinner)
+        progressBar = findViewById(R.id.loading_spinner)
 
         val backButton = findViewById<Button>(R.id.btnBack)
         backButton.setOnClickListener {
@@ -46,6 +55,8 @@ class ProfileActivity : Activity() {
             startActivity(intent)
             finish()
         }
+        // Show the loading spinner and hide profile content initially
+        profileContent.visibility = View.GONE
     }
 
     override fun onStart() {
@@ -70,6 +81,8 @@ class ProfileActivity : Activity() {
     }
 
     private fun getUserById(userId: Int) {
+        runOnUiThread { progressBar.visibility = View.VISIBLE }
+
         val url = "$BASE_URL/cliente/$userId"
         val request = Request.Builder()
             .url(url)
@@ -83,11 +96,13 @@ class ProfileActivity : Activity() {
                     val intent = Intent(this@ProfileActivity, LoginActivity::class.java)
                     startActivity(intent)
                     finish()
+                    progressBar.visibility = View.GONE
                 }
             }
 
             override fun onResponse(call: Call, response: Response) {
                 if (response.isSuccessful) {
+                    runOnUiThread { progressBar.visibility = View.GONE }
                     val responseBody = response.body?.string()
                     if (responseBody != null) {
                         try {
@@ -116,6 +131,8 @@ class ProfileActivity : Activity() {
                                 generoView.text = genero
                                 cpfView.text = """CPF $cpf"""
                                 telView.text = """($ddd) $nrtelefone"""
+
+                                findViewById<LinearLayout>(R.id.profile_content).visibility = View.VISIBLE
                             }
                         } catch (e: JSONException) {
                             runOnUiThread {
