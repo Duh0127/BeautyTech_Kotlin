@@ -38,6 +38,10 @@ class RegisterActivity : Activity() {
         val edtEstadoCivil = findViewById<EditText>(R.id.edtEstadoCivil)
         val edtTelefone = findViewById<EditText>(R.id.edtTelefone)
 
+        edtCpf.filters = arrayOf(InputFilter.LengthFilter(11), InputFilter { source, start, end, dest, dstart, dend ->
+            if (source.matches("[0-9]*".toRegex())) null else ""
+        })
+
         edtTelefone.filters = arrayOf(InputFilter.LengthFilter(9))
 
         val edtGen = findViewById<EditText>(R.id.edtGenero)
@@ -56,6 +60,29 @@ class RegisterActivity : Activity() {
                 return@setOnClickListener
             }
 
+            val cabelo = edtCabelo.text.toString().lowercase(Locale.getDefault()).replaceFirstChar { it.uppercase() }
+            if (cabelo !in listOf("Liso", "Ondulado", "Cacheado", "Crespo")) {
+                Toast.makeText(this, "Tipo de cabelo inválido. Use: Liso, Ondulado, Cacheado ou Crespo.", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+
+            val pele = edtPele.text.toString().lowercase(Locale.getDefault()).replaceFirstChar { it.uppercase() }
+            if (pele !in listOf("Branca", "Parda", "Negra")) {
+                Toast.makeText(this, "Tipo de pele inválido. Use: Branca, Parda ou Negra.", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+
+            val genero = edtGen.text.toString().lowercase(Locale.getDefault()).replaceFirstChar { it.uppercase() }
+            if (genero !in listOf("Masculino", "Feminino")) {
+                Toast.makeText(this, "Gênero inválido. Use Masculino ou Feminino.", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+
+            val estadoCivil = edtEstadoCivil.text.toString().uppercase(Locale.getDefault())
+            if (estadoCivil !in listOf("CASADO", "SOLTEIRO")) {
+                Toast.makeText(this, "Estado Civil inválido. Use CASADO ou SOLTEIRO.", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
 
             try {
                 val telefone = edtTelefone.text.toString()
@@ -73,8 +100,8 @@ class RegisterActivity : Activity() {
 
 
             val idGenero = when {
-                edtGen.text.contains("Masculino", ignoreCase = true) -> 1
-                edtGen.text.contains("Feminino", ignoreCase = true) -> 2
+                genero == "Masculino" -> 1
+                genero == "Feminino" -> 2
                 else -> {
                     Toast.makeText(this, "Gênero inválido. Use Masculino ou Feminino.", Toast.LENGTH_LONG).show()
                     return@setOnClickListener
@@ -97,9 +124,9 @@ class RegisterActivity : Activity() {
                 email = edtEmail.text.toString(),
                 cpf = edtCpf.text.toString(),
                 dataNascimento = dataNascimento,
-                estadoCivil = edtEstadoCivil.text.toString(),
-                pele = edtPele.text.toString(),
-                cabelo = edtCabelo.text.toString(),
+                estadoCivil = estadoCivil,
+                pele = pele,
+                cabelo = cabelo,
                 senha = edtSenha.text.toString(),
                 ddi = "+55",
                 ddd = 11,
