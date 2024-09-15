@@ -87,14 +87,18 @@ class ProfileActivity : Activity() {
                         val emailUsuario = jsonObject.getString("EMAIL_CLIENTE")
                         val statusCivil = jsonObject.getString("ESTADO_CIVIL_CLIENTE")
                         val genero = jsonObject.getString("NM_GENERO")
+                        val cabelo = jsonObject.getString("CABELO_CLIENTE")
+                        val pele = jsonObject.getString("PELE_CLIENTE")
                         val cpf = jsonObject.getString("CPF_CLIENTE")
                         val nrtelefone = jsonObject.getString("NR_TELEFONE")
                         val ddd = jsonObject.getString("DDD_TELEFONE")
 
                         val nomeTextView = findViewById<TextView>(R.id.txtName)
                         val emailTextView = findViewById<TextView>(R.id.txtEmail)
-                        val statusCivilView = findViewById<TextView>(R.id.txtStatusCivil)
-                        val generoView = findViewById<TextView>(R.id.txtGenero)
+                        val statusCivilView = findViewById<TextView>(R.id.txtCabelo)
+                        val generoView = findViewById<TextView>(R.id.txtPele)
+                        val cabeloView = findViewById<TextView>(R.id.txtCabelo)
+                        val peleView = findViewById<TextView>(R.id.txtPele)
                         val cpfView = findViewById<TextView>(R.id.txtCpf)
                         val telView = findViewById<TextView>(R.id.txtTelefone)
 
@@ -102,6 +106,8 @@ class ProfileActivity : Activity() {
                         emailTextView.text = emailUsuario
                         statusCivilView.text = statusCivil
                         generoView.text = genero
+                        cabeloView.text = cabelo
+                        peleView.text = pele
                         cpfView.text = """CPF $cpf"""
                         telView.text = """($ddd) $nrtelefone"""
 

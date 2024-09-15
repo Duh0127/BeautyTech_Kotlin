@@ -3,6 +3,7 @@ package com.example.beautytech_challenge.activities
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.text.InputFilter
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
@@ -35,20 +36,41 @@ class RegisterActivity : Activity() {
         val edtCpf = findViewById<EditText>(R.id.edtCpf)
         val edtDataNasc = findViewById<EditText>(R.id.edtDtNasc)
         val edtEstadoCivil = findViewById<EditText>(R.id.edtEstadoCivil)
-        val edtDDD = findViewById<EditText>(R.id.edtDDD)
         val edtTelefone = findViewById<EditText>(R.id.edtTelefone)
+
+        edtTelefone.filters = arrayOf(InputFilter.LengthFilter(9))
+
         val edtGen = findViewById<EditText>(R.id.edtGenero)
+        val edtPele = findViewById<EditText>(R.id.edtPele)
+        val edtCabelo = findViewById<EditText>(R.id.edtCabelo)
         val edtSenha = findViewById<EditText>(R.id.edtSenha)
 
         val btnCadastro = findViewById<Button>(R.id.btnRegister)
         btnCadastro.setOnClickListener {
             if (edtNome.text.isBlank() || edtEmail.text.isBlank() || edtCpf.text.isBlank() ||
-                edtDataNasc.text.isBlank() || edtEstadoCivil.text.isBlank() || edtDDD.text.isBlank() ||
-                edtTelefone.text.isBlank() || edtGen.text.isBlank() || edtSenha.text.isBlank()
+                edtDataNasc.text.isBlank() || edtEstadoCivil.text.isBlank() ||
+                edtTelefone.text.isBlank() || edtGen.text.isBlank() || edtSenha.text.isBlank() ||
+                edtPele.text.isBlank() || edtCabelo.text.isBlank()
             ) {
                 Toast.makeText(this, "Por favor, preencha todos os campos.", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
+
+
+            try {
+                val telefone = edtTelefone.text.toString()
+                if (telefone.length != 9) {
+                    throw IllegalArgumentException("O telefone deve conter exatamente 9 caracteres.")
+                }
+                telefone.toIntOrNull() ?: throw NumberFormatException("O telefone deve conter apenas números.")
+            } catch (e: IllegalArgumentException) {
+                Toast.makeText(this, e.message, Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            } catch (e: NumberFormatException) {
+                Toast.makeText(this, e.message, Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+
 
             val idGenero = when {
                 edtGen.text.contains("Masculino", ignoreCase = true) -> 1
@@ -70,23 +92,17 @@ class RegisterActivity : Activity() {
                 return@setOnClickListener
             }
 
-            val ddd: Int
-            try {
-                ddd = edtDDD.text.toString().toInt()
-            } catch (e: NumberFormatException) {
-                Toast.makeText(this, "DDD inválido. Deve conter apenas números.", Toast.LENGTH_LONG).show()
-                return@setOnClickListener
-            }
-
             registerRepository.register(
                 nome = edtNome.text.toString(),
                 email = edtEmail.text.toString(),
                 cpf = edtCpf.text.toString(),
                 dataNascimento = dataNascimento,
                 estadoCivil = edtEstadoCivil.text.toString(),
+                pele = edtPele.text.toString(),
+                cabelo = edtCabelo.text.toString(),
                 senha = edtSenha.text.toString(),
                 ddi = "+55",
-                ddd = ddd,
+                ddd = 11,
                 telefone = edtTelefone.text.toString(),
                 idGenero = idGenero
             ) { success, errorMessage ->
@@ -115,7 +131,8 @@ class RegisterActivity : Activity() {
         val edtCpf = findViewById<EditText>(R.id.edtCpf)
         val edtDataNasc = findViewById<EditText>(R.id.edtDtNasc)
         val edtEstadoCivil = findViewById<EditText>(R.id.edtEstadoCivil)
-        val edtDDD = findViewById<EditText>(R.id.edtDDD)
+        val edtPele = findViewById<EditText>(R.id.edtPele)
+        val edtCabelo = findViewById<EditText>(R.id.edtCabelo)
         val edtTelefone = findViewById<EditText>(R.id.edtTelefone)
         val edtGen = findViewById<EditText>(R.id.edtGenero)
         val edtSenha = findViewById<EditText>(R.id.edtSenha)
@@ -125,7 +142,8 @@ class RegisterActivity : Activity() {
         edtCpf.setText("")
         edtDataNasc.setText("")
         edtEstadoCivil.setText("")
-        edtDDD.setText("")
+        edtPele.setText("")
+        edtCabelo.setText("")
         edtTelefone.setText("")
         edtGen.setText("")
         edtSenha.setText("")
