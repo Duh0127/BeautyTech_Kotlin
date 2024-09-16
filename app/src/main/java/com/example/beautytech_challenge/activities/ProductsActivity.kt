@@ -82,7 +82,8 @@ class ProductsActivity : Activity() {
                                 id = jsonObject.getInt("ID_PRODUTO"),
                                 name = jsonObject.getString("NM_PRODUTO"),
                                 price = "R$${jsonObject.getDouble("VL_PRODUTO")}",
-                                imageUrl = jsonObject.getString("IMG_PRODUTO")
+                                imageUrl = jsonObject.getString("IMG_PRODUTO"),
+                                description = jsonObject.getString("DESC_PRODUTO")
                             )
                             productList.add(product)
                         }

@@ -4,13 +4,18 @@ import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.beautytech_challenge.adapters.ProductAdapter
@@ -18,6 +23,7 @@ import com.example.beautytech_challenge.R
 import com.example.beautytech_challenge.models.Product
 import com.example.beautytech_challenge.repositories.MainRepository
 import com.squareup.picasso.Picasso
+import org.json.JSONObject
 
 
 class MainActivity : Activity() {
@@ -36,11 +42,19 @@ class MainActivity : Activity() {
         val userData = sharedPreferences.getString("userData", null)
 
         if (userData != null) {
+            val userInfo = JSONObject(userData)
+            val clientId = userInfo.getJSONObject("usuario").getInt("id")
+
+            Log.v("USERDATA", userInfo.toString())
+            Log.v("USER_ID", clientId.toString())
+
             loginButton.text = "Perfil"
             loginButton.setOnClickListener {
                 val profileIntent = Intent(this, ProfileActivity::class.java)
                 startActivity(profileIntent)
             }
+
+            getRecommendedProduct(clientId)
         } else {
             loginButton.setOnClickListener {
                 val loginIntent = Intent(this, LoginActivity::class.java)
@@ -62,6 +76,17 @@ class MainActivity : Activity() {
         cardContainer.adapter = productAdapter
 
         getProducts()
+
+        val searchField = findViewById<EditText>(R.id.editTextText)
+        searchField.setOnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                val query = searchField.text.toString()
+                Toast.makeText(this, "Pesquisa: $query", Toast.LENGTH_SHORT).show()
+                true
+            } else {
+                false
+            }
+        }
     }
 
     private fun getProducts() {
@@ -81,6 +106,33 @@ class MainActivity : Activity() {
                 }
             }
         }
+    }
+
+    private fun getRecommendedProduct(clientId: Int?) {
+        repository.fetchRecommendedProduct(clientId.toString()) { product, errorMessage ->
+            runOnUiThread {
+                if (product != null) {
+                    showRecommendedProduct(product)
+                } else if (errorMessage != null) {
+                    Toast.makeText(this@MainActivity, errorMessage, Toast.LENGTH_LONG).show()
+                }
+            }
+        }
+    }
+
+    private fun showRecommendedProduct(product: Product) {
+        val recommendedProductCard = findViewById<CardView>(R.id.recommended_product_card)
+        recommendedProductCard.visibility = View.VISIBLE
+
+        val recommendedProductName = findViewById<TextView>(R.id.recommended_product_name)
+        val recommendedProductPrice = findViewById<TextView>(R.id.recommended_product_price)
+        val recommendedProductDesc = findViewById<TextView>(R.id.recommended_product_desc)
+        val recommendedProductImage = findViewById<ImageView>(R.id.recommended_product_image)
+
+        recommendedProductName.text = product.name
+        recommendedProductPrice.text = product.price
+        recommendedProductDesc.text = product.description ?: "Sem descrição disponível"
+        Picasso.get().load(product.imageUrl).into(recommendedProductImage)
     }
 
     private fun showProductDetails(product: Product) {

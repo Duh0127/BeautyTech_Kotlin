@@ -9,7 +9,7 @@
 -------
 
 ### BACKEND REPLIT
-- https://replit.com/@rodatupmocgamer/BeautyTechAPI  (link do backend no replit que conectará no banco oracle sql da fiap para funcionar o sistema kotlin)
+- https://replit.com/@edu0127okubo/BeautyTechAPI  (link do backend no replit que conectará no banco oracle sql da fiap para funcionar o sistema kotlin)
 
 ### EXPLICAÇÃO PROJETO
 > O problema que nosso projeto visa solucionar no ramo de cosméticos envolve três desafios principais:
