@@ -154,7 +154,7 @@ class RegisterActivity : Activity() {
         Log.d("CADASTRO", "Cadastro Efetuado com sucesso")
 
         val edtNome = findViewById<EditText>(R.id.edtName)
-        val edtEmail = findViewById<EditText>(R.id.edtEmail)
+        val edtEmail = findViewById<EditText>(R.id.edtNomeEdit)
         val edtCpf = findViewById<EditText>(R.id.edtCpf)
         val edtDataNasc = findViewById<EditText>(R.id.edtDtNasc)
         val edtEstadoCivil = findViewById<EditText>(R.id.edtEstadoCivil)

@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#100D28">
+
+    <ProgressBar
+        android:id="@+id/progressBarEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="411dp"
+        android:layout_marginTop="731dp"
+        android:layout_marginEnd="411dp"
+        android:layout_marginBottom="731dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/mainLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnVoltarProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="11dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="17dp"
+                android:text="Voltar" />
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Editar Perfil"
+                android:textColor="#FFFFFF"
+                android:textSize="34sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nome"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/edtNomeEdit"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="#BDBDBD"
+                android:ems="10"
+                android:hint="Digite seu nome"
+                android:inputType="text"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Email"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/edtEmailEdit"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="#BDBDBD"
+                android:ems="10"
+                android:hint="Digite seu email"
+                android:inputType="textEmailAddress"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="CPF"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/edtCPFEdit"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="#BDBDBD"
+                android:ems="10"
+                android:hint="Digite seu CPF"
+                android:inputType="number"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Data de Nascimento"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/edtDataNascEdit"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="#BDBDBD"
+                android:ems="10"
+                android:hint="Digite sua data de nascimento"
+                android:inputType="date"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Estado Civil"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/edtEstadoCivilEdit"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="#BDBDBD"
+                android:ems="10"
+                android:hint="Digite seu estado civil"
+                android:inputType="text"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pele"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/edtPeleEdit"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="#BDBDBD"
+                android:ems="10"
+                android:hint="Digite a cor de sua pele"
+                android:inputType="text"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cabelo"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/edtCabeloEdit"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="#BDBDBD"
+                android:ems="10"
+                android:hint="Digite o tipo do seu cabelo"
+                android:inputType="text"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Genero"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/edtGeneroEdit"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="#BDBDBD"
+                android:ems="10"
+                android:hint="Digite seu Genero"
+                android:inputType="number"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Telefone"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/edtTelefoneEdit"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="#BDBDBD"
+                android:ems="10"
+                android:hint="Digite seu telefone"
+                android:inputType="phone"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Senha"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/edtSenhaEdit"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="#BDBDBD"
+                android:ems="10"
+                android:hint="Digite sua senha"
+                android:inputType="textPassword"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnSalvarEdit"
+            android:layout_width="match_parent"
+            android:layout_height="59dp"
+            android:text="Salvar Alterações" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

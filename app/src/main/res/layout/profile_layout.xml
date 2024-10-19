@@ -59,22 +59,6 @@
                 android:textColor="#FFFFFF"
                 android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/txtCpf"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/txtTelefone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp" />
-
         </LinearLayout>
 
         <LinearLayout
@@ -102,11 +86,11 @@
                     android:background="#23B6B6B6">
 
                     <TextView
-                        android:id="@+id/cabelooooo"
+                        android:id="@+id/koakosdkoas"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="Status Civil"
+                        android:text="Estado Civil"
                         android:textAlignment="center"
                         android:textAllCaps="true"
                         android:textColor="#FFFFFF"
@@ -114,7 +98,7 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/txtStatusCivil"
+                        android:id="@+id/edtEstadoCivilProfile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -131,7 +115,7 @@
                     android:background="#23B6B6B6">
 
                     <TextView
-                        android:id="@+id/peleeeeee"
+                        android:id="@+id/okaskodkoaskodoas"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -143,7 +127,7 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/txtGenero"
+                        android:id="@+id/edtGeneroProfile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -192,7 +176,7 @@
                         android:text="Cabelo" />
 
                     <TextView
-                        android:id="@+id/txtCabelo"
+                        android:id="@+id/edtCabeloProfile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -221,7 +205,7 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/txtPele"
+                        android:id="@+id/edtPeleProfile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -235,7 +219,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="51dp"
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
@@ -252,6 +236,13 @@
                     android:layout_marginEnd="12dp"
                     android:background="#FFFFFF"
                     android:text="Voltar" />
+
+                <Button
+                    android:id="@+id/btnEditProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:text="Editar Perfil" />
 
                 <Button
                     android:id="@+id/btnLogout"

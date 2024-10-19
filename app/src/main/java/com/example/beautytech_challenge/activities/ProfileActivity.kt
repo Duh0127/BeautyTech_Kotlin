@@ -29,6 +29,12 @@ class ProfileActivity : Activity() {
         val profileContent = findViewById<LinearLayout>(R.id.profile_content)
         progressBar = findViewById(R.id.loading_spinner)
 
+        val btnEditProfile = findViewById<Button>(R.id.btnEditProfile)
+        btnEditProfile.setOnClickListener {
+            val intent = Intent(this, EditProfileActivity::class.java)
+            startActivity(intent)
+        }
+
         val backButton = findViewById<Button>(R.id.btnBack)
         backButton.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
@@ -95,12 +101,10 @@ class ProfileActivity : Activity() {
 
                         val nomeTextView = findViewById<TextView>(R.id.txtName)
                         val emailTextView = findViewById<TextView>(R.id.txtEmail)
-                        val statusCivilView = findViewById<TextView>(R.id.txtCabelo)
-                        val generoView = findViewById<TextView>(R.id.txtPele)
-                        val cabeloView = findViewById<TextView>(R.id.txtCabelo)
-                        val peleView = findViewById<TextView>(R.id.txtPele)
-                        val cpfView = findViewById<TextView>(R.id.txtCpf)
-                        val telView = findViewById<TextView>(R.id.txtTelefone)
+                        val statusCivilView = findViewById<TextView>(R.id.edtEstadoCivilProfile)
+                        val generoView = findViewById<TextView>(R.id.edtGeneroProfile)
+                        val cabeloView = findViewById<TextView>(R.id.edtCabeloProfile)
+                        val peleView = findViewById<TextView>(R.id.edtPeleProfile)
 
                         nomeTextView.text = nomeUsuario
                         emailTextView.text = emailUsuario
@@ -108,8 +112,6 @@ class ProfileActivity : Activity() {
                         generoView.text = genero
                         cabeloView.text = cabelo
                         peleView.text = pele
-                        cpfView.text = """CPF $cpf"""
-                        telView.text = """($ddd) $nrtelefone"""
 
                         findViewById<LinearLayout>(R.id.profile_content).visibility = View.VISIBLE
                     } catch (e: JSONException) {
