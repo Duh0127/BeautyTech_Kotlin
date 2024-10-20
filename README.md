@@ -1,4 +1,4 @@
-# PROJETO BEAUTY TECH - SPRINT 03
+# PROJETO BEAUTY TECH - SPRINT 04
 
 ### INTEGRANTES
 - Carlos Alberto Macharelli Junior - 551677
