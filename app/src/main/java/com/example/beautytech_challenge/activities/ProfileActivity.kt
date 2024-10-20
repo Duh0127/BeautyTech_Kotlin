@@ -54,6 +54,28 @@ class ProfileActivity : Activity() {
             finish()
         }
 
+        val deleteConfirmationModal = findViewById<LinearLayout>(R.id.modal_delete_confirmation)
+        val btnCancel = findViewById<Button>(R.id.btnCancelDelete)
+        val btnConfirmDelete = findViewById<Button>(R.id.btnConfirmDelete)
+
+        findViewById<Button>(R.id.btnDeleteProfile).setOnClickListener {
+            deleteConfirmationModal.visibility = View.VISIBLE
+            profileContent.visibility = View.GONE
+        }
+
+        btnCancel.setOnClickListener {
+            deleteConfirmationModal.visibility = View.GONE
+            profileContent.visibility = View.VISIBLE
+        }
+
+        btnConfirmDelete.setOnClickListener {
+            deleteConfirmationModal.visibility = View.GONE
+            val userId = userInfo.getJSONObject("usuario").getInt("id")
+            deleteUserById(userId)
+            profileContent.visibility = View.GONE
+        }
+
+
         profileContent.visibility = View.GONE
     }
 
@@ -117,6 +139,29 @@ class ProfileActivity : Activity() {
                     } catch (e: JSONException) {
                         Toast.makeText(this@ProfileActivity, "Erro ao processar os dados do usuário", Toast.LENGTH_LONG).show()
                     }
+                } else if (errorMessage != null) {
+                    Toast.makeText(this@ProfileActivity, errorMessage, Toast.LENGTH_LONG).show()
+                }
+            }
+        }
+    }
+
+    private fun deleteUserById(userId: Int) {
+        runOnUiThread { progressBar.visibility = View.VISIBLE }
+
+        repository.deleteProfile(userId) { responseBody, errorMessage ->
+            runOnUiThread {
+                progressBar.visibility = View.GONE
+                if (responseBody != null) {
+                    val sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
+                    sharedPreferences.edit().clear().apply()
+
+                    Toast.makeText(this@ProfileActivity, "Perfil excluído com sucesso", Toast.LENGTH_LONG).show()
+
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                    startActivity(intent)
+                    finish()
                 } else if (errorMessage != null) {
                     Toast.makeText(this@ProfileActivity, errorMessage, Toast.LENGTH_LONG).show()
                 }

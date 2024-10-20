@@ -15,7 +15,7 @@ import java.io.IOException
 class EditProfileRepository(private val activity: Activity) {
 
     private val client = OkHttpClient()
-    private val BASE_URL = "https://0f7867b6-e97c-46c8-8a0f-798b12121071-00-1xlw48mwghd1f.spock.replit.dev"
+    private val BASE_URL = "https://ba6cbd81-1616-4535-9d50-b84eb76f82a3-00-cbuh6miz1cm9.worf.replit.dev"
 
     fun update(
         userId: String,
