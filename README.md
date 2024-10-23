@@ -11,6 +11,9 @@
 ### BACKEND REPLIT
 - https://replit.com/@edu0127okubo/BeautyTechAPI  (link do backend no replit que conectará no banco oracle sql da fiap para funcionar o sistema kotlin)
 
+### BACKEND IA (caso queira testar)
+- https://replit.com/@edu0127okubo/ApiAISprint
+
 ### EXPLICAÇÃO PROJETO
 > O problema que nosso projeto visa solucionar no ramo de cosméticos envolve três desafios principais:
 > - O primeiro é a falta de engajamento do cliente em buscar informações e produtos específicos, considerando que o mercado é extremamente grande.
