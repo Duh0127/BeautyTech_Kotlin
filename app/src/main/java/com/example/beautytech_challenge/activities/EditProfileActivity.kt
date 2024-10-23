@@ -204,7 +204,7 @@ class EditProfileActivity: Activity() {
             val nome = userJson.getString("NM_CLIENTE")
             val email = userJson.getString("EMAIL_CLIENTE")
             val cpf = userJson.getString("CPF_CLIENTE")
-            val dataNascimento = userJson.getString("DT_NASCIMENTO_CLIENTE")
+            val dataNascimento = formatarData(userJson.getString("DT_NASCIMENTO_CLIENTE"))
             val estadoCivil = userJson.getString("ESTADO_CIVIL_CLIENTE")
             val pele = userJson.getString("PELE_CLIENTE")
             val cabelo = userJson.getString("CABELO_CLIENTE")
@@ -224,6 +224,17 @@ class EditProfileActivity: Activity() {
             findViewById<EditText>(R.id.edtTelefoneEdit).setText(telefone)
         } catch (e: JSONException) {
             Toast.makeText(this, "Erro ao processar os dados do usuário", Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun formatarData(dataISO: String): String {
+        return try {
+            val formatoOriginal = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            val formatoDesejado = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+            val data = formatoOriginal.parse(dataISO)
+            formatoDesejado.format(data ?: "")
+        } catch (e: Exception) {
+            "Data inválida"
         }
     }
 

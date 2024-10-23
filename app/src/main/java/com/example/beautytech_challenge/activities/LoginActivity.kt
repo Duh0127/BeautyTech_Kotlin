@@ -79,11 +79,6 @@ class LoginActivity : Activity() {
 
         Toast.makeText(this, "Bem-vindo $nomeUsuario", Toast.LENGTH_LONG).show()
 
-        val edtEmail = findViewById<EditText>(R.id.edtNomeEdit)
-        val edtSenha = findViewById<EditText>(R.id.edtPassword)
-        edtEmail.setText("")
-        edtSenha.setText("")
-
         val intent = Intent(this, ProfileActivity::class.java)
         startActivity(intent)
         finish()

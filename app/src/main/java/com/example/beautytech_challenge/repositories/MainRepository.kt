@@ -81,6 +81,7 @@ class MainRepository () {
                     if (responseBody != null) {
                         try {
                             val jsonObject = JSONObject(responseBody)
+                            Log.v("Resposta IA", "JSON -> ${jsonObject.getJSONObject("details")}")
                             val productDetails = jsonObject.getJSONObject("details")
                             val product = Product(
                                 id = productDetails.getInt("ID_PRODUTO"),
